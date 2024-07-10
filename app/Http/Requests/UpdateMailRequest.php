@@ -11,7 +11,7 @@ class UpdateMailRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateMailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'code' => 'required|string|max:255',
+            'category_id' => 'required|exists:mail_categories,id',
+            'title' => 'required|string|max:255',
+            'file' => 'nullable|file|mimes:pdf|max:5120',
         ];
     }
 }
